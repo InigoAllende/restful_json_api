@@ -29,12 +29,11 @@ def _read_contents(file):
     with open(file) as csvdata:
         next(csvdata, None) # skip the headers
         reader = csv.DictReader(csvdata,fieldnames=['name', 'value','timestamp'])
-        print(json.dumps([row for row in reader]))
         return json.dumps([row for row in reader])
 
 def _send_request(data):
     """ send a request with the file data json in the body """
-    r = requests.post('http://127.0.0.1:5000/api/v1/metrics', json=data)
+    requests.post('http://127.0.0.1:5000/api/v1/metrics', json=data)
 
 def _get_files(path):
     try:
