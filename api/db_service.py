@@ -21,6 +21,10 @@ def _initialize_tables(connection):
 
 def insert_metrics(data):
     """ perform a db INSERT """
+    with sqlite3.connect('metrics.db') as connection:
+        cursor = connection.cursor()
+        for item in data:
+            cursor.execute("insert into metrics values (?,?,?)", item)
     pass
 
 def get_all_data():
