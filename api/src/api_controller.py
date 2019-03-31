@@ -1,27 +1,20 @@
+import db_service
+
 import flask
-import sqlite3
 
 from flask_api import status
-from sqlite3 import Error
 
 app = flask.Flask(__name__)
 app.config["DEBUG"] = True
 
-DB_CONN = None
+INIT_ERROR = None
 
 @app.route('/api/v1/health', methods=['GET'])
 def healtch_check():
     """ Check if db is up and running """
-    if (not _create_connection()):
+    if (not INIT_ERROR):
         return 'everything is ok', status.HTTP_200_OK
-    return 'ups, there seems to be an error on our side', status.HTTP_503_SERVICE_UNAVAILABLE
-
-def _create_connection():
-    """ create a database connection to a SQLite database """
-    try:
-        DB_CONN = sqlite3.connect('metrics.db')
-    except Error as e:
-        return e
+    return 'ups, there is an error on our side', status.HTTP_503_SERVICE_UNAVAILABLE
 
 @app.route('/api/v1/metrics/stats', methods=['GET'])
 def fetch_stats():
@@ -35,4 +28,5 @@ def load_metrics():
 def fetch_all_metrics():
     return "<h1>You get all the data back</h1>"
 
+INIT_ERROR = db_service.initialize_db()
 app.run()
