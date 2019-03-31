@@ -19,10 +19,18 @@ def upload_data():
 
 def _send_data(path, file_list):
     """ iterate over the files and upload the data """
+    check_server()
     for item in file_list:
         if str(item).endswith('.csv'):
             data = _read_contents(os.path.join(path, item))
             _send_request(data)
+
+def check_server():
+    """ Checks server health and quits if service is not available """
+    r = requests.get('http://127.0.0.1:5000/api/v1/health')
+    if r.status_code != 200:
+        print('service is unavailable %s' % r.text)
+        sys.exit(2)
 
 def _read_contents(file):
     """ open file and return its contents as json """
