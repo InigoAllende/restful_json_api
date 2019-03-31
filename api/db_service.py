@@ -1,5 +1,6 @@
 import sql_queries
 
+import json
 import sqlite3
 
 from sqlite3 import Error
@@ -24,8 +25,8 @@ def insert_metrics(data):
     with sqlite3.connect('metrics.db') as connection:
         cursor = connection.cursor()
         for item in data:
-            cursor.execute("insert into metrics values (?,?,?)", item)
-    pass
+            query = (sql_queries.INSERT_METRIC % (data[item]['name'], data[item]['value'], data[item]['timestamp']))
+            cursor.execute(query)
 
 def get_all_data():
     """ returns all stored metrics """

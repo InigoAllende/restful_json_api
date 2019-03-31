@@ -23,10 +23,11 @@ def fetch_stats():
 
 @app.route('/api/v1/metrics', methods=['POST'])
 def load_metrics():
-    if not request.json or not 'title' in request.json:
+    if not request.json:
         abort(400)
+    # TODO: think of a better way to retrieve error/success
     exception, code = api_service.add_data_to_db(request.json)
-    if code:
+    if exception:
         return str(exception), code
     return 'data added', status.HTTP_200_OK
 

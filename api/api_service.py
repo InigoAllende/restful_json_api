@@ -5,10 +5,9 @@ import jsonschema
 
 schema = {
     "type": "object",
-    "metric": {
+    "id": {
         "type": "object",
-        "required": ["name", "value", "date"]},
-    "required": ["metric"]
+        "required": ["name", "value", "date"]}
 }
 
 def initialize_db():
@@ -18,9 +17,12 @@ def add_data_to_db(data_json):
     """ iterate over received metrics and add them to the db """
     try:
         jsonschema.validate(data_json, schema)
+        db_service.insert_metrics(data_json)
     except jsonschema.exceptions.ValidationError as e:
         return e, 400
-    pass
+    except Exception as e:
+        return e, 500
+    return None, 200
 
 def _process_json_data(data_json):
     """ process json request if necessary """
@@ -32,8 +34,9 @@ def fetch_stats():
 
 def fetch_stored_data ():
     """ get data from the db and return it in a json """
-    pass
+    return _convert_db_data_to_json(db_service.get_all_data())
+    
 
-def _convert_db_data_to_json():
+def _convert_db_data_to_json(db_data):
     """ transform db response to json object """
     pass
