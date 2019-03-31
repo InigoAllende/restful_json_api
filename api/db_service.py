@@ -18,4 +18,11 @@ def _initialize_tables(connection):
     with connection:
         c = connection.cursor()
         c.execute(sql_queries.CREATE_TABLE)
-   
+
+def insert_metrics(data):
+    """ perform a db INSERT """
+    pass
+
+def get_all_data():
+    """ returns all stored metrics """
+    pass

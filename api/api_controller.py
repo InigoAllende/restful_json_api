@@ -1,4 +1,4 @@
-import db_service
+import api_service
 
 import flask
 
@@ -25,11 +25,12 @@ def fetch_stats():
 def load_metrics():
     if not request.json or not 'title' in request.json:
         abort(400)
-    return "<h1>Where you send us your data</h1>"
+    api_service.add_data_to_db(request.json)
+    return 'data added', status.HTTP_200_OK
 
 @app.route('/api/v1/metrics', methods=['GET'])
 def fetch_all_metrics():
     return "<h1>You get all the data back</h1>"
 
-INIT_ERROR = db_service.initialize_db()
+INIT_ERROR = api_service.initialize_db()
 app.run()
