@@ -35,12 +35,9 @@ def _read_contents(file):
 def _send_request(data):
     """ send a request with the file data json in the body """
     r = requests.post('http://127.0.0.1:5000/api/v1/metrics', json=data)
-    print('***********')
-    print(r)
 
 def _get_files(path):
     try:
-        print(path)
         return os.listdir(path)
     except:
         print('provided path is not valid')
