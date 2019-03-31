@@ -36,7 +36,10 @@ def fetch_stored_data ():
     """ get data from the db and return it in a json """
     return _convert_db_data_to_json(db_service.get_all_data())
     
-
 def _convert_db_data_to_json(db_data):
     """ transform db response to json object """
-    pass
+    json_data = {}
+    for index in range(len(db_data)):
+        name, value, timestamp = db_data[index]
+        json_data[index] = {'name': name, 'value': value, 'timestamp': timestamp}
+    return json.dumps(json_data)

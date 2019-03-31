@@ -30,4 +30,7 @@ def insert_metrics(data):
 
 def get_all_data():
     """ returns all stored metrics """
-    pass
+    with sqlite3.connect('metrics.db') as connection:
+        cursor = connection.cursor()
+        cursor.execute(sql_queries.SELECT_ALL)
+        return cursor.fetchall()

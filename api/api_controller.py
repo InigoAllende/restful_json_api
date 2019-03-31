@@ -33,7 +33,10 @@ def load_metrics():
 
 @app.route('/api/v1/metrics', methods=['GET'])
 def fetch_all_metrics():
-    return "<h1>You get all the data back</h1>"
+    try:
+        return api_service.fetch_stored_data(), status.HTTP_200_OK
+    except Exception:
+        abort(500)
 
 INIT_ERROR = api_service.initialize_db()
 app.run()
