@@ -2,7 +2,7 @@ import api_service
 
 import flask
 
-from flask import abort, request
+from flask import abort, jsonify, request
 from flask_api import status
 
 app = flask.Flask(__name__)
@@ -34,7 +34,7 @@ def load_metrics():
 @app.route('/api/v1/metrics', methods=['GET'])
 def fetch_all_metrics():
     try:
-        return api_service.fetch_stored_data(), status.HTTP_200_OK
+        return jsonify(api_service.fetch_stored_data()), status.HTTP_200_OK
     except Exception:
         abort(500)
 

@@ -42,4 +42,4 @@ def _convert_db_data_to_json(db_data):
     for index in range(len(db_data)):
         name, value, timestamp = db_data[index]
         json_data[index] = {'name': name, 'value': value, 'timestamp': timestamp}
-    return json.dumps(json_data)
+    return json_data
