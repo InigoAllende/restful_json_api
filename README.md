@@ -1,3 +1,13 @@
+# execution
+Install requirements.txt
+`pip install -r requirements.txt`
+
+Start API
+`python3 api/api_controller.py`
+
+Start client
+`python3 client/client.py --import FOLDER_PATH`
+
 ## What is working
 API health
 
