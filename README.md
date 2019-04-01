@@ -10,14 +10,20 @@ Start client
 
 ### json format
 The json structure to upload data should look like this:
-`
+
+```
 {'id':{
+
   'name':'#name',
+  
   'value':'#value',
+  
   'timestamp':'#timestamp'
+  
   }
+  
 }  
-`
+```
 
 ## What is working
 API health
