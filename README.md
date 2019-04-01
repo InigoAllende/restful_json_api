@@ -8,6 +8,17 @@ Start API
 Start client
 `python3 client/client.py --import FOLDER_PATH`
 
+### json format
+The json structure to upload data should look like this:
+`
+{'id':{
+  'name':'#name',
+  'value':'#value',
+  'timestamp':'#timestamp'
+  }
+}  
+`
+
 ## What is working
 API health
 
